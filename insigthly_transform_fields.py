@@ -108,6 +108,9 @@ def extract_fields(contact, custom_field_ids):
     background = contact['BACKGROUND']
     fields = {}
 
+    if background is None:
+        return None
+
     for f in custom_field_ids:
         r = re.compile('^%s:\s(.+)$' % f, re.MULTILINE)
 
@@ -140,7 +143,8 @@ def main():
     unprocessed_contacts = filter_contacts_unprocessed(get_contacts())
     for c in unprocessed_contacts:
         fields = extract_fields(c, custom_field_ids)
-        put_contact(c, fields)
+        if fields is not None:
+            put_contact(c, fields)
 
 if __name__ == '__main__':
     main()
