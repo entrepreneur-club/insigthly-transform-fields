@@ -144,6 +144,9 @@ def main():
     for c in unprocessed_contacts:
         fields = extract_fields(c, custom_field_ids)
         if fields is not None:
+            # always overwrite the 'ETH EC Membership' custom field with
+            # the least-dangerous default value.
+            fields['CONTACT_FIELD_4'] = 'Newsletter (Non-Member)'
             put_contact(c, fields)
 
 if __name__ == '__main__':
