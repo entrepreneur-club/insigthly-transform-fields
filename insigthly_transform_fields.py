@@ -109,7 +109,7 @@ def extract_fields(contact, custom_field_ids):
     fields = {}
 
     if background is None:
-        return None
+        return fields
 
     for f in custom_field_ids:
         r = re.compile('^%s:\s(.+)$' % f, re.MULTILINE)
